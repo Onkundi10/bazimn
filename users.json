@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "email": "admin@bazimn.local",
+    "password": "admin",
+    "role": "admin",
+    "wallet": 0,
+    "verificationLevel": "basic",
+    "createdAt": 1768461010166
+  }
+]

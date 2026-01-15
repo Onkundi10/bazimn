@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bazimn Marketplace</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/main.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Bazimn</h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/howitworks.html">How&nbsp;It&nbsp;Works</a>
+      <a href="/become-seller.html">Become&nbsp;a&nbsp;Seller</a>
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/prohibited.html">Prohibited Services</a>
+      <a href="/disputes.html">Dispute&nbsp;& Refund</a>
+    </nav>
+  </header>
+  <div class="container">
+    <!-- Messages -->
+    <div id="message" class="message hidden"></div>
+    <!-- Login/Logout section -->
+    <div id="auth-section">
+      <!-- Hidden area; content inserted by JS -->
+    </div>
+    <!-- Gig creation form (seller only) -->
+    <div id="create-gig-section" class="hidden">
+      <h2>Create a Gig</h2>
+      <form id="create-gig-form">
+        <label>Title
+          <input type="text" name="title" required>
+        </label>
+        <label>Description
+          <input type="text" name="description" required>
+        </label>
+        <label>Price (USD)
+          <input type="number" step="0.01" name="price" required>
+        </label>
+        <label>Category
+          <input type="text" name="category" placeholder="General">
+        </label>
+        <button type="submit">Create Gig</button>
+      </form>
+    </div>
+    <!-- Gig list -->
+    <h2>Available Gigs</h2>
+    <div id="gigs" class="gigs"></div>
+  </div>
+</body>
+</html>

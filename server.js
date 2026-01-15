@@ -14,8 +14,8 @@ const path = require('path');
  */
 
 // Directory paths
-const DATA_DIR = path.join(__dirname, 'data');
-const PUBLIC_DIR = path.join(__dirname, 'public');
+const DATA_DIR = __dirname;
+const PUBLIC_DIR = __dirname;
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {

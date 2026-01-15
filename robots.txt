@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bazimn.onrender.com/sitemap.xml

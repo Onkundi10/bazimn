@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy – Bazimn</title>
   <link rel="stylesheet" href="/styles.css">
-    <meta name="description" content="Read Bazimn's privacy policy. Learn how we collect, use, and protect user data on our marketplace.">
-    <meta name="robots" content="index, follow">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
 </head>
 <body>
   <header>
@@ -43,5 +43,11 @@
     <p>We use cookies and similar technologies to authenticate users, remember preferences and analyse traffic. You can manage cookie settings in your browser, but some features may not work without cookies.</p>
     <p>For questions about this policy, contact our privacy team.</p>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => { /* ignore */ });
+  }
+  </script>
 </body>
 </html>

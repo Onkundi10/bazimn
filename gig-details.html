@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gig Details - Bazimn</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
+</head>
+<body>
+  <header>
+    <h1>Bazimn</h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/howitworks.html">How&nbsp;It&nbsp;Works</a>
+      <a href="/become-seller.html">Become&nbsp;a&nbsp;Seller</a>
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/inbox.html">Inbox</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/prohibited.html">Prohibited Services</a>
+      <a href="/disputes.html">Dispute&nbsp;&nbsp;Refund</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div id="gigDetails">Loading...</div>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const container = document.getElementById('gigDetails');
+    if (!id) {
+      container.textContent = 'Gig not found.';
+      return;
+    }
+    try {
+      const res = await fetch('/api/gigs/' + id);
+      const data = await res.json();
+      if (res.ok) {
+        const gig = data.gig;
+        container.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'gig-card';
+        const h3 = document.createElement('h3');
+        h3.textContent = gig.title;
+        const pDesc = document.createElement('p');
+        pDesc.textContent = gig.description;
+        const pPrice = document.createElement('p');
+        pPrice.textContent = `Price: $${gig.price}`;
+        card.appendChild(h3);
+        card.appendChild(pDesc);
+        card.appendChild(pPrice);
+        const role = localStorage.getItem('role');
+        const userId = localStorage.getItem('userId');
+        if (role === 'buyer') {
+          const btn = document.createElement('button');
+          btn.textContent = 'Order';
+          btn.addEventListener('click', async () => {
+            const token = localStorage.getItem('token');
+            const resp = await fetch('/api/orders', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+              body: JSON.stringify({ gigId: gig.id })
+            });
+            const d = await resp.json();
+            alert(resp.ok ? 'Order placed successfully' : (d.error || 'Order failed'));
+          });
+          card.appendChild(btn);
+        } else {
+          const note = document.createElement('span');
+          if (role === 'seller' && gig.sellerId === userId) {
+            note.textContent = 'Your gig';
+          } else {
+            note.textContent = 'Login as buyer to order';
+          }
+          card.appendChild(note);
+        }
+        container.appendChild(card);
+      } else {
+        container.textContent = data.error || 'Gig not found.';
+      }
+    } catch (err) {
+      container.textContent = 'Network error';
+    }
+  });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+  }
+  </script>
+</body>
+</html>

@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-      <meta name="description" content="Review Bazimn's Terms of Service, outlining the rights, responsibilities, and rules for using our marketplace.">
-    <meta name="robots" content="index, follow">
-<title>Terms of Service – Bazimn</title>
+  <title>Terms of Service – Bazimn</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
 </head>
 <body>
   <header>
@@ -50,5 +49,11 @@
     <p>These terms are governed by the laws of Kenya. Any disputes arising out of these terms will be resolved in the courts of Nairobi, Kenya unless otherwise agreed.</p>
     <p>If you have questions about these terms, please contact our support team.</p>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => { /* ignore */ });
+  }
+  </script>
 </body>
 </html>

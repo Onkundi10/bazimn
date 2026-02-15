@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dispute & Refund Policy – Bazimn</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
 </head>
 <body>
   <header>
@@ -33,5 +35,11 @@
     <p>If a buyer initiates a chargeback through their payment provider, seller funds related to that order will be frozen until the matter is resolved. Abuse of chargebacks may result in account suspension.</p>
     <p>If you have questions about this policy or need help with a dispute, please contact support.</p>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => { /* ignore */ });
+  }
+  </script>
 </body>
 </html>

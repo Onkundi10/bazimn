@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How It Works – Bazimn</title>
   <link rel="stylesheet" href="/styles.css">
-    <meta name="description" content="Learn how Bazimn works. Understand the process for hiring freelancers and offering services on our marketplace.">
-    <meta name="robots" content="index, follow">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
 </head>
 <body>
   <header>
@@ -33,5 +33,11 @@
     </ol>
     <p>Ready to get started? <a href="/index.html">Sign up</a> as a buyer or seller today.</p>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => { /* ignore */ });
+  }
+  </script>
 </body>
 </html>

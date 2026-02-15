@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inbox - Bazimn</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
+</head>
+<body>
+  <header>
+    <h1>Bazimn</h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/howitworks.html">How&nbsp;It&nbsp;Works</a>
+      <a href="/become-seller.html">Become&nbsp;a&nbsp;Seller</a>
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/inbox.html">Inbox</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/prohibited.html">Prohibited Services</a>
+      <a href="/disputes.html">Dispute&nbsp;&nbsp;Refund</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Your Messages</h2>
+    <div id="threads"></div>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/index.html';
+      return;
+    }
+    try {
+      const res = await fetch('/api/inbox', {
+        method: 'GET',
+        headers: { Authorization: 'Bearer ' + token }
+      });
+      const data = await res.json();
+      const container = document.getElementById('threads');
+      if (res.ok) {
+        if (!data.threads || data.threads.length === 0) {
+          container.textContent = 'No messages yet.';
+        } else {
+          data.threads.forEach(thread => {
+            const div = document.createElement('div');
+            div.className = 'gig-card';
+            const h3 = document.createElement('h3');
+            h3.textContent = `Order #${thread.orderId}`;
+            const p = document.createElement('p');
+            p.textContent = thread.lastMessage ? `Last message: ${thread.lastMessage.text}` : 'No messages yet.';
+            const a = document.createElement('a');
+            a.href = '/dashboard.html';
+            a.textContent = 'View conversation';
+            div.appendChild(h3);
+            div.appendChild(p);
+            div.appendChild(a);
+            container.appendChild(div);
+          });
+        }
+      } else {
+        container.textContent = data.error || 'Could not load inbox.';
+      }
+    } catch (err) {
+      document.getElementById('threads').textContent = 'Network error';
+    }
+  });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+  }
+  </script>
+</body>
+</html>

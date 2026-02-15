@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-      <meta name="description" content="Learn which services are prohibited on Bazimn, including illegal, harmful, or high-risk offerings.">
-    <meta name="robots" content="index, follow">
-<title>Prohibited Services – Bazimn</title>
+  <title>Prohibited Services – Bazimn</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6a0dad">
 </head>
 <body>
   <header>
@@ -36,5 +35,11 @@
     </ol>
     <p>If you come across a listing that violates these rules, please report it via the reporting tools on the platform.</p>
   </div>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').catch((err) => { /* ignore */ });
+  }
+  </script>
 </body>
 </html>
